@@ -1,4 +1,4 @@
-buildscript {
+/*buildscript {
     repositories {
         google()
         //mavenCentral()
@@ -11,11 +11,12 @@ buildscript {
    //     classpath ("com.android.tools.build:gradle:8.2.2")
         //classpath("com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.1")
     }
-}
+}*/
  plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'maven-publish'
+
+     id 'maven-publish'
 }
 
 
@@ -67,6 +68,49 @@ buildscript {
         }
     }
 }
+publishing {
+    publications {
+        // maven(MavenPublication) {
+        bar(MavenPublication) {
+            groupId = 'com.github.arv'
+            artifactId = 'size'
+            version = "1.0.1"
+            artifact("$buildDir/outputs/aar/appLib-release.aar")
+            /*  pom {
+                  // Set the pom.xml metadata
+                  name = "Your Library Name"
+                  description = "Description of your library"
+                  url = "https://jitpack.io"
+
+                  licenses {
+                      license {
+                          name = 'The Apache License, Version 2.0'
+                          url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                      }
+                  }
+                  developers {
+                      developer {
+                          id = 'Arvind.shishodia15@gmail.com'
+                          name = 'Arvind'
+                          email = 'Arvind.shishodia15@gmail.com'
+                      }
+                  }
+              }*/
+        }
+    }
+    repositories {               // << --- ADD This
+        maven{
+
+            name="arvind"
+            url=uri("https://maven.pkg.github.com/arvindshishodia/testLib")
+            credentials{
+                username="arvindshishodia"
+                password="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"
+            }
+        }
+        //mavenCentral()
+    }
+}
 
 dependencies {
     api('com.intuit.sdp:sdp-android:1.0.6'){
@@ -96,36 +140,4 @@ dependencies {
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
 }
- // 5. Publishing:
- publishing {
-     publications {
-         maven(MavenPublication) {
-             groupId = 'com.github.arvindshishodia'
-             artifactId = 'sizeindeplib'
-             version = "1.0.10"
-             pom {
-                 // Set the pom.xml metadata
-                 name = "Your Library Name"
-                 description = "Description of your library"
-                 url = "https://jitpack.io"
-
-                 licenses {
-                     license {
-                         name = 'The Apache License, Version 2.0'
-                         url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
-                     }
-                 }
-                 developers {
-                     developer {
-                         id = 'Arvind.shishodia15@gmail.com'
-                         name = 'Arvind'
-                         email = 'Arvind.shishodia15@gmail.com'
-                     }
-                 }
-             }
-         }
-     }
-     repositories {               // << --- ADD This
-         mavenCentral()
-     }
- }
+ // 5. Publishing://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
